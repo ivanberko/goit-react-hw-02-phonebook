@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { formAddContact } from "./ContactForm.module.css";
 
 export default class ContactForm extends Component {
   state = {
     name: "",
     number: "",
+  };
+
+  static propTypes = {
+    onAddContact: PropTypes.func.isRequired,
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -13,19 +19,22 @@ export default class ContactForm extends Component {
   };
 
   handleSubmit = (e) => {
+    const { name, number } = this.state;
     const { onAddContact } = this.props;
     e.preventDefault();
-    onAddContact({ ...this.state });
-    this.setState({
-      name: "",
-      number: "",
-    });
+    if (name && number) {
+      onAddContact({ ...this.state });
+      this.setState({
+        name: "",
+        number: "",
+      });
+    }
   };
 
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={formAddContact} onSubmit={this.handleSubmit}>
         <label>
           Name
           <input

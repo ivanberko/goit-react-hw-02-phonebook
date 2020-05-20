@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Filter = ({contacts, filter, handleFindName}) => (
+const Filter = ({ contacts, filter, handleFindName }) => (
   <div>
     {contacts.length >= 2 && (
       <label>
-        Find
+        Find contacts by name
         <input
           type="text"
           name="filter"
@@ -15,4 +16,10 @@ const Filter = ({contacts, filter, handleFindName}) => (
     )}
   </div>
 );
+Filter.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.shape()),
+  filter: PropTypes.string.isRequired,
+  handleFindName: PropTypes.func.isRequired,
+};
+
 export default Filter;
