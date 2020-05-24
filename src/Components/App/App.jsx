@@ -23,8 +23,8 @@ export default class App extends Component {
 
     if (!isExistContact) {
       const contactToAdd = {
-        ...contact,
         id: uuidv4(),
+        ...contact
       };
 
       this.setState((prevState) => ({
