@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { formAddContact } from "./ContactForm.module.css";
 
+const initState = {
+  name: "",
+  number: "",
+};
+
 export default class ContactForm extends Component {
-  state = {
-    name: "",
-    number: "",
-  };
+  state = { ...initState };
 
   static propTypes = {
     onAddContact: PropTypes.func.isRequired,
@@ -22,11 +24,10 @@ export default class ContactForm extends Component {
     const { name, number } = this.state;
     const { onAddContact } = this.props;
     e.preventDefault();
-    if (name && number) {
+    if (name && Number(number)) {
       onAddContact({ ...this.state });
       this.setState({
-        name: "",
-        number: "",
+        ...initState,
       });
     }
   };

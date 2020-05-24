@@ -17,7 +17,7 @@ const Filter = ({ contacts, filter, handleFindName }) => (
   </div>
 );
 Filter.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape()),
+  contacts: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
   filter: PropTypes.string.isRequired,
   handleFindName: PropTypes.func.isRequired,
 };
