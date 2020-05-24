@@ -17,7 +17,9 @@ export default class App extends Component {
 
   addContact = (contact) => {
     const { contacts } = this.state;
-    const isExistContact = contacts.find((item) => item.name.toLowerCase() === contact.name.toLowerCase());
+    const isExistContact = contacts.find(
+      (item) => item.name.toLowerCase() === contact.name.toLowerCase()
+    );
 
     if (!isExistContact) {
       const contactToAdd = {
@@ -50,6 +52,21 @@ export default class App extends Component {
       [name]: value,
     });
   };
+
+  componentDidMount() {
+    const persistedContacts = localStorage.getItem("contacts");
+    if (persistedContacts) {
+      const contacts = JSON.parse(persistedContacts);
+      this.setState({ contacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+  }
 
   render() {
     const { contacts, filter } = this.state;
